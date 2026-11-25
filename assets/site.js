@@ -70,9 +70,15 @@
       if (film.paused) { userPaused = false; store('cr-film', 'playing'); film.play(); setToggle(false); }
       else { userPaused = true; store('cr-film', 'paused'); film.pause(); setToggle(true); }
     });
+    /* a tab opened in the background refuses autoplay: start once it is seen */
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState !== 'visible' || !film.src || userPaused || !film.paused) return;
+      if (hero.getBoundingClientRect().bottom <= 0) return;
+      var p = film.play(); if (p && p.then) p.then(function () { setToggle(false); film.classList.add('is-on'); }, function () {});
+    });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) {
-        es.forEach(function (en) { if (!film.src) return; if (en.isIntersecting) { if (!userPaused) film.play().catch(function () {}); } else film.pause(); });
+        es.forEach(function (en) { if (!film.src) return; if (en.isIntersecting) { if (!userPaused) film.play().then(function () { setToggle(false); film.classList.add("is-on"); }, function () {}); } else film.pause(); });
       }, { threshold: 0.05 }).observe(hero);
     }
   }
