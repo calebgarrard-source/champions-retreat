@@ -1,6 +1,6 @@
 /* Champions Retreat, concept page. Linen and ink, the logo's bronze, one colour per nine.
-   Type is the club's own: Optima LT Pro and Proxima Nova (Adobe Fonts). Apple devices show their
-   system Optima until a kit loads; Avenir Next stands in for Proxima Nova there. */
+   Type is the club's own: Optima LT Pro and Proxima Nova, from Adobe Fonts (web project gpa6brv).
+   If the kit does not load, Apple devices fall back to system Optima and Avenir Next. */
 
 @font-face { font-family: "Ballpoint"; src: url("fonts/nothing-you-could-do.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 
